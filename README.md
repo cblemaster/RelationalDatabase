@@ -33,18 +33,19 @@ Demonstrates:
         MOVIE {
             string(255) title
             string(255) directorName
-            int releaseYear ">= 1900 and <= 2500"
-            int runningTimeMinutes "> 0"
-            int(nullable) starRating ">= 1 and <= 5, or null"
-            date dateAcquired "year >= releaseYear"
+            int releaseYear "between 1900 and 2500 inclusive"
+            int runningTimeMinutes "greater than 0"
+            int(nullable) starRating "between 1 and 5 inclusive, or null"
+            date(nullable) dateAcquired "year >= releaseYear"
         }
         
         GENRE {
-            string(255) description
+            string(20) description UK
         }
 
         RATING {
-            string(10) description
+            string(12) description UK
+            bool isKidFriendly
         }
 
         ACTOR {
