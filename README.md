@@ -50,6 +50,7 @@ Demonstrates:
 
         ACTOR {
             string(255) name
+            bool IsDeceased
         }
 
 ```
