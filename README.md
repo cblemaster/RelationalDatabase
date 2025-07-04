@@ -25,10 +25,7 @@ Demonstrates:
 + Develop some kind of testing for database operations
 #### ER Diagram
 ```mermaid
-    ---
-    title: MovieCollection
-    ---
-    erDiagram
+   erDiagram
         MOVIE }o--|| GENRE : "has a"
         MOVIE }o--|| RATING : "has a"
         MOVIE }|..|{ ACTOR : has
