@@ -2,6 +2,8 @@
 USE master
 GO
 
+-- drop and create database
+-- TODO: use variable for db name
 DECLARE @sql nvarchar(1000);
 
 IF EXISTS (SELECT 1 FROM sys.databases WHERE name = N'MovieCollection')
@@ -22,8 +24,65 @@ GO
 USE MovieCollection
 GO
 
+-- create schema
+CREATE SCHEMA Movies
+GO
 
--- create tables (1.5h)
+-- create tables
+CREATE TABLE Movies.Genre(
+	Id UNIQUEIDENTIFIER NOT NULL,
+	[Description] VARCHAR(20) NOT NULL,
+	CONSTRAINT PK_Genre PRIMARY KEY(Id),
+	CONSTRAINT UC_Genre_Description UNIQUE([Description])
+)
+GO
+
+CREATE TABLE Movies.Rating(
+	Id UNIQUEIDENTIFIER NOT NULL,
+	[Description] VARCHAR(12) NOT NULL,
+	IsKidFriendly BIT NOT NULL,
+	CONSTRAINT PK_Rating PRIMARY KEY(Id),
+	CONSTRAINT UC_Rating_Description UNIQUE([Description]),
+)
+GO
+
+CREATE TABLE Movies.Movie(
+	Id UNIQUEIDENTIFIER NOT NULL,
+	Title VARCHAR(255) NOT NULL,
+	DirectorName VARCHAR(255) NOT NULL,
+	ReleaseYear INT NOT NULL,
+	RunTimeMinutes INT NOT NULL,
+	StarRating INT NULL,
+	DateAcquired DATE NULL,
+	GenreId UNIQUEIDENTIFIER NOT NULL,
+	RatingId UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT PK_Movie PRIMARY KEY(Id),
+	CONSTRAINT FK_Movie_Genre FOREIGN KEY(GenreId) REFERENCES Movies.Genre(Id),
+	CONSTRAINT FK_Movie_Rating FOREIGN KEY(RatingId) REFERENCES Movies.Rating(Id),
+	CONSTRAINT CK_Movie_ReleaseYear CHECK(ReleaseYear >= 1900 AND ReleaseYear <= 2500),
+	CONSTRAINT CK_Movie_RunTimeMinutes CHECK(RunTimeMinutes > 0),
+	CONSTRAINT CK_Movie_StarRating CHECK(StarRating IS NULL OR (StarRating >= 1 AND StarRating <= 5)),
+	CONSTRAINT CK_Movie_DateAcquired CHECK(YEAR(DateAcquired) >= ReleaseYear),
+)
+GO
+
+CREATE TABLE Movies.Actor(
+	Id UNIQUEIDENTIFIER NOT NULL,
+	[Name] VARCHAR(255) NOT NULL,
+	IsDeceased BIT NOT NULL,
+	CONSTRAINT PK_Actor PRIMARY KEY(Id),
+)
+GO
+
+CREATE TABLE Movies.MovieActor(
+	MovieId UNIQUEIDENTIFIER NOT NULL,
+	ActorId UNIQUEIDENTIFIER NOT NULL,
+	CONSTRAINT PK_MovieActor PRIMARY KEY(MovieId,ActorId),
+	CONSTRAINT FK_MovieActor_Movie FOREIGN KEY(MovieId) REFERENCES Movies.Movie(Id),
+	CONSTRAINT FK_MovieActor_Actor FOREIGN KEY(ActorId) REFERENCES Movies.Actor(Id),
+)
+GO
+
 -- seed data when tables created (1.5h)
 -- define and create views (4h)
 -- define and create sprocs (4h)
