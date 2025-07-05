@@ -46,6 +46,14 @@ CREATE TABLE Movies.Rating(
 )
 GO
 
+CREATE TABLE Movies.Actor(
+	Id UNIQUEIDENTIFIER NOT NULL,
+	[Name] VARCHAR(255) NOT NULL,
+	IsDeceased BIT NOT NULL,
+	CONSTRAINT PK_Actor PRIMARY KEY(Id),
+)
+GO
+
 CREATE TABLE Movies.Movie(
 	Id UNIQUEIDENTIFIER NOT NULL,
 	Title VARCHAR(255) NOT NULL,
@@ -66,14 +74,6 @@ CREATE TABLE Movies.Movie(
 )
 GO
 
-CREATE TABLE Movies.Actor(
-	Id UNIQUEIDENTIFIER NOT NULL,
-	[Name] VARCHAR(255) NOT NULL,
-	IsDeceased BIT NOT NULL,
-	CONSTRAINT PK_Actor PRIMARY KEY(Id),
-)
-GO
-
 CREATE TABLE Movies.MovieActor(
 	MovieId UNIQUEIDENTIFIER NOT NULL,
 	ActorId UNIQUEIDENTIFIER NOT NULL,
@@ -83,7 +83,339 @@ CREATE TABLE Movies.MovieActor(
 )
 GO
 
--- seed data when tables created (1.5h)
+-- seed data
+-- required genre data
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Action');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Adventure');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Animated adults');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Animated kids');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Comedy');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Documentary');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Drama');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Family Comedy');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Fantasy');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Historical');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Horror');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Kids');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Mystery');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Romance');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Science Fiction');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Thriller');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Young Adult');
+INSERT INTO Movies.Genre(Id,[Description]) VALUES(NEWID(),'Other');
+
+-- required rating data
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'G',1);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'PG',1);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'PG-13',1);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'R',0);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'NC-17',0);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'X',0);
+INSERT INTO Movies.Rating(Id,[Description],IsKidFriendly) VALUES(NEWID(),'Unrated',0);
+
+-- optional actor data
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'John Cho',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Zoe Kravitz',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rachel Weisz',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Kate Winslet',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Henry Golding',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Donald Glover',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Dev Patel',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Diane Lane',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Paul Mescal',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Sean Bean',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Hiroyuki Sanada',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Letitia Wright',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Anya Taylor-Joy',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Samira Wiley',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Matthew McConaughey',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ken Jeong',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Riz Ahmed',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Natalie Dormer',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Elisabeth Moss',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Priyanka Chopra Jonas',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ewan McGregor',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Greta Gerwig',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Pedro Pascal',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Christina Ricci',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Yahya Abdul-Mateen II',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Gemma Chan',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Hugh Jackman',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Emily Blunt',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Liam Neeson',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Timothée Chalamet',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Winona Ryder',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Tilda Swinton',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rinko Kikuchi',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Gael García Bernal',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Awkwafina',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Forest Whitaker',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Elisabeth Debicki',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Sam Neill',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Angela Bassett',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Devika Bhise',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Monica Bellucci',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jodie Comer',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ethan Hawke',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Daniel Kaluuya',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Kristen Stewart',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Monica Cruz',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jude Law',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Naomi Watts',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Nikolaj Coster-Waldau',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Chris Hemsworth',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Tatiana Maslany',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Michelle Yeoh',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rooney Mara',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Edward Norton',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Toni Collette',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Sandra Oh',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Dominique Fishback',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Isabelle Huppert',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ken Watanabe',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jessica Henwick',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Tessa Thompson',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Joe Keery',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ben Kingsley',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Daniel Craig',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Constance Wu',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Florence Pugh',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Sophie Okonedo',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Diego Luna',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Cynthia Erivo',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Helena Bonham Carter',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Mahershala Ali',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rami Malek',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jeremy Renner',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Julianne Moore',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jessica Chastain',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Oscar Isaac',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Taron Egerton',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Lakeith Stanfield',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Gugu Mbatha-Raw',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Daniel Dae Kim',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Mackenzie Davis',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Adrien Brody',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Vanessa Kirby',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Zhang Ziyi',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Chiwetel Ejiofor',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Emily Mortimer',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Zazie Beetz',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Cuba Gooding Jr.',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Simu Liu',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Adrien Grenier',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Hunter Schafer',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jason Sudeikis',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Marion Cotillard',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'John David Washington',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Olivia Cooke',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ralph Fiennes',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Andrew Garfield',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'James McAvoy',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Kate Hudson',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rila Fukushima',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Penn Badgley',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Willem Dafoe',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ruth Negga',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Cillian Murphy',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Alicia Vikander',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Margot Robbie',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Ben Whishaw',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Joseph Gordon-Levitt',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Tom Hardy',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rosario Dawson',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jason Isaacs',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Michael Fassbender',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Clive Owen',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Bryce Dallas Howard',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jonathan Majors',0);
+INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Idris Elba',0);
+
+-- optional movie data; IMPORTANT: dependent upon actor data above
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Fog Beneath Us','Lila Marenko',2021,102,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Galaxia Drift','Carmelo D''Argento',2014,118,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Fantasy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Last Violin','Eli Nunez',1998,89,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Cider & Cyanide','Greta Howell',2009,96,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Documentary'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'Unrated'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Beneath Verdant Skies','Milo Tanaka',2017,111,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Neon Wisdom','K.J. Monroe',2023,100,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Martian Hearth','Rafiq Santos',2024,127,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Science Fiction'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'Unrated'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Waltzing with Fireflies','Ana Vélez Campos',2006,104,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Fantasy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'NC-17'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Lighthouse Protocol','J.T. Ballard',2025,129,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Documentary'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Clockmaker''s Swan','Halima Goh',1995,93,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Fantasy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Kingdom of Mirrors','Yohan Aramaki',2012,114,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Adventure'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Echoes in the Plum Rain','Florence Dube',2020,107,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Comedy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Crimson Orbit','Mateo Yanez',2018,122,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Vesper''s Notation','Cedric Osei',2019,91,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Historical'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Burial at Ivory Bay','Claire DuPont',2001,95,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Giraffes of Pyongyang','Tomàs Villanova',2024,112,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Other'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'NC-17'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'A Tremble in the Atlas','Miriam Haider',2018,106,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Shadow Ballet','Jordan Leclair',2016,88,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Thriller'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Steel Petals','Ava Grimaldi',2022,99,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Oracle''s Reverie','Devika Sharma',2017,115,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Mystery'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Dust in the Kaleidoscope','Julian Adebayo',2010,101,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Documentary'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'G'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Hollow Garden','Seiko Matsuda',2015,109,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Historical'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Echo Circuit','Nikos Demetriou',2016,117,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Family Comedy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Blood & Butterflies','Josie Feldman',2003,94,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Midnight Shoals','Hayden Black',2024,110,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Lanterns of Thera','Mireille Cheung',2019,103,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Salamander Code','Tariq Al-Saleh',2007,100,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'G'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Shepherd''s Thesis','Paola Conti',2011,92,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Thriller'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Ashes Over Halifax','Declan Merritt',2002,106,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Concrete Euphoria','Reva Patel',2021,124,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Action'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Sapphire Valley','Nia Forsberg',1996,99,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Family Comedy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'After the Glitch','Milo Rakovic',2021,113,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Science Fiction'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Marionette Pact','Kenji Sakamoto',2008,96,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Fantasy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Vultures of Verona','Carmen Ortega',2007,120,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Young Adult'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Chronicles of the Mirth','Quincy Holloway',2017,108,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Comedy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Papyrus Requiem','Luanda Vaziri',2005,91,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Harmonic Drift','Ellis Montague',2025,107,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Science Fiction'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Ice Harvest Diaries','Nadine Roussel',2014,98,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Adventure'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Widow''s Semaphore','Imani Glover',1999,105,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated adults'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Cloudshaper''s Waltz','Sanjay Rao',2023,116,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Historical'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Whispers from Sardinia','Carla Romano',2013,108,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Thriller'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Silicon Moonlight','Orion Patel',2014,119,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Fifth Reflection','Agnieszka Zielinski',2000,95,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Jetstream Dharma','Hiroshi Yamamoto',2024,110,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Axe & Acetone','Valerie Grunwald',2016,87,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Velvet Sphinx','Matteo Bianciardi',2007,102,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Science Fiction'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Harvest of Echoes','Anya Doukas',2022,106,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Thriller'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Third Viaduct','Lester Quan',2011,100,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Mystery'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Copenhagen Teeth','Freya Jørgensen',2004,96,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Lost Among Marsupials','Jonah Lieberman',2019,103,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Documentary'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'Unrated'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Calculus Affair','Omar El-Masry',2003,118,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Historical'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Banyan Mirage','Siti Rahim',2018,94,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Adventure'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Tunnel of Crows','Felix Navarro',2025,111,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Mockingbird Carnival','Antonina Petrov',1997,92,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Opera for Ants','Gideon Meyer',2006,99,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'G'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Snowplow Conspiracy','Maggie Li',2020,105,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Documentary'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Kite Strings & Concrete','Russel Adebayo',2009,114,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Animated kids'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Postcards from the Umbra','Léon Marchand',2002,90,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'NC-17'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Lemming Identity','Etsuko Nakamura',2014,98,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Young Adult'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
+INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Gardenia Protocol','Rafael Choi',2025,121,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
+
+-- optional movie-actor data; IMPORTANT: dependent upon actor and movie data above
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Fog Beneath Us'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'John Cho'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Galaxia Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Zoe Kravitz'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Last Violin'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rachel Weisz'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Cider & Cyanide'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Kate Winslet'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Beneath Verdant Skies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Henry Golding'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Neon Wisdom'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Donald Glover'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Martian Hearth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Dev Patel'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Waltzing with Fireflies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Diane Lane'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lighthouse Protocol'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Paul Mescal'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Clockmaker''s Swan'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Sean Bean'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Kingdom of Mirrors'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Hiroyuki Sanada'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Echoes in the Plum Rain'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Letitia Wright'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Crimson Orbit'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Anya Taylor-Joy'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Vesper''s Notation'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Samira Wiley'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Burial at Ivory Bay'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Matthew McConaughey'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Giraffes of Pyongyang'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ken Jeong'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'A Tremble in the Atlas'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Riz Ahmed'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Shadow Ballet'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Natalie Dormer'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Steel Petals'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Elisabeth Moss'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Oracle''s Reverie'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Priyanka Chopra Jonas'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Dust in the Kaleidoscope'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ewan McGregor'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Hollow Garden'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Greta Gerwig'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Echo Circuit'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Pedro Pascal'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Blood & Butterflies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Christina Ricci'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Midnight Shoals'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Yahya Abdul-Mateen II'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lanterns of Thera'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Gemma Chan'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Salamander Code'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Hugh Jackman'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Shepherd''s Thesis'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Emily Blunt'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Ashes Over Halifax'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Liam Neeson'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Concrete Euphoria'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Timothée Chalamet'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Sapphire Valley'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Winona Ryder'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'After the Glitch'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Tilda Swinton'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Marionette Pact'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rinko Kikuchi'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Vultures of Verona'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Gael García Bernal'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Chronicles of the Mirth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Awkwafina'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Papyrus Requiem'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Forest Whitaker'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Harmonic Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Elisabeth Debicki'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Ice Harvest Diaries'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Sam Neill'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Widow''s Semaphore'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Angela Bassett'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Cloudshaper''s Waltz'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Devika Bhise'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Whispers from Sardinia'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Monica Bellucci'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Silicon Moonlight'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jodie Comer'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Fifth Reflection'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ethan Hawke'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Jetstream Dharma'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Daniel Kaluuya'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Axe & Acetone'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Kristen Stewart'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Velvet Sphinx'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Monica Cruz'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Harvest of Echoes'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jude Law'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Third Viaduct'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Naomi Watts'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Copenhagen Teeth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Nikolaj Coster-Waldau'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lost Among Marsupials'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Chris Hemsworth'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Calculus Affair'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Tatiana Maslany'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Banyan Mirage'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Michelle Yeoh'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Tunnel of Crows'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rooney Mara'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Mockingbird Carnival'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Edward Norton'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Opera for Ants'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Toni Collette'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Snowplow Conspiracy'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Sandra Oh'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Kite Strings & Concrete'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Dominique Fishback'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Postcards from the Umbra'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Isabelle Huppert'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Lemming Identity'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ken Watanabe'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Gardenia Protocol'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jessica Henwick'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Fog Beneath Us'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Tessa Thompson'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Galaxia Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Joe Keery'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Last Violin'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ben Kingsley'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Cider & Cyanide'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Daniel Craig'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Beneath Verdant Skies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Constance Wu'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Neon Wisdom'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Florence Pugh'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Martian Hearth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Sophie Okonedo'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Waltzing with Fireflies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Diego Luna'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lighthouse Protocol'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Cynthia Erivo'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Clockmaker''s Swan'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Helena Bonham Carter'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Kingdom of Mirrors'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Gemma Chan'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Echoes in the Plum Rain'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Mahershala Ali'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Crimson Orbit'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rami Malek'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Vesper''s Notation'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jeremy Renner'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Burial at Ivory Bay'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Julianne Moore'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Giraffes of Pyongyang'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Awkwafina'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'A Tremble in the Atlas'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jessica Chastain'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Shadow Ballet'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Oscar Isaac'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Steel Petals'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Taron Egerton'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Oracle''s Reverie'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Lakeith Stanfield'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Dust in the Kaleidoscope'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Gugu Mbatha-Raw'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Hollow Garden'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Daniel Dae Kim'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Echo Circuit'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Mackenzie Davis'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Blood & Butterflies'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Adrien Brody'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Midnight Shoals'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Vanessa Kirby'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lanterns of Thera'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Oscar Isaac'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Salamander Code'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Zhang Ziyi'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Shepherd''s Thesis'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Chiwetel Ejiofor'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Ashes Over Halifax'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Emily Mortimer'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Concrete Euphoria'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Zazie Beetz'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Sapphire Valley'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Cuba Gooding Jr.'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'After the Glitch'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Simu Liu'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Marionette Pact'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Adrien Grenier'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Vultures of Verona'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Hunter Schafer'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Chronicles of the Mirth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jason Sudeikis'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Papyrus Requiem'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Marion Cotillard'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Harmonic Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'John David Washington'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Ice Harvest Diaries'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Olivia Cooke'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Widow''s Semaphore'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ralph Fiennes'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Cloudshaper''s Waltz'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Andrew Garfield'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Whispers from Sardinia'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'James McAvoy'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Silicon Moonlight'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Donald Glover'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Fifth Reflection'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Kate Hudson'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Jetstream Dharma'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rila Fukushima'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Axe & Acetone'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Penn Badgley'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Velvet Sphinx'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Willem Dafoe'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Harvest of Echoes'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ruth Negga'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Third Viaduct'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Cillian Murphy'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Copenhagen Teeth'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Alicia Vikander'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Lost Among Marsupials'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Margot Robbie'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Calculus Affair'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Ben Whishaw'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Banyan Mirage'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Joseph Gordon-Levitt'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Tunnel of Crows'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Tom Hardy'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Mockingbird Carnival'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rosario Dawson'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Opera for Ants'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jason Isaacs'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Snowplow Conspiracy'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Michael Fassbender'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Kite Strings & Concrete'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Paul Mescal'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Postcards from the Umbra'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Clive Owen'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Lemming Identity'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Bryce Dallas Howard'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Gardenia Protocol'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Jonathan Majors'));
+INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Galaxia Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Idris Elba'));
+
 -- define and create views (4h)
 -- define and create sprocs (4h)
 -- define and create tests (8h)
