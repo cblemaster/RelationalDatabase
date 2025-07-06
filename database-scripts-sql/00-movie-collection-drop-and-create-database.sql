@@ -27,3 +27,7 @@ GO
 -- create schema
 CREATE SCHEMA Movies
 GO
+
+-- create application role
+CREATE APPLICATION ROLE MoviesAppRole WITH PASSWORD = 'Dm4332!HCI1Wkk', DEFAULT_SCHEMA = Movies
+GO
