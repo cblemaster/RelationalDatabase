@@ -106,5 +106,3 @@ AS
    WHERE m.Id = @MovieId;
    SELECT @@ROWCOUNT;
 GO
-
-

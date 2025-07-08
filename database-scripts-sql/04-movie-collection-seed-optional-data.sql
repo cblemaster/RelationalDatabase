@@ -2,8 +2,7 @@
 USE MovieCollection
 GO
 
--- optional actor data
--- /*
+/* optional actor data 
 INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'John Cho',0);
 INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Zoe Kravitz',0);
 INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Rachel Weisz',0);
@@ -122,8 +121,7 @@ INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Jonathan Majors',
 INSERT INTO Movies.Actor(Id,[Name],IsDeceased) VALUES(NEWID(),'Idris Elba',0);
 -- */
 
--- optional movie data; IMPORTANT: dependent upon actor data above
---/*
+/* optional movie data; IMPORTANT: dependent upon actor data above
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Fog Beneath Us','Lila Marenko',2021,102,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Horror'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Galaxia Drift','Carmelo D''Argento',2014,118,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Fantasy'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Last Violin','Eli Nunez',1998,89,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
@@ -184,10 +182,9 @@ INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRa
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Postcards from the Umbra','L�on Marchand',2002,90,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Drama'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'NC-17'));
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'The Lemming Identity','Etsuko Nakamura',2014,98,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Young Adult'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'PG-13'));
 INSERT INTO Movies.Movie(Id,Title,DirectorName,ReleaseYear,RunTimeMinutes,StarRating,DateAcquired,GenreId,RatingId) VALUES(NEWID(),'Gardenia Protocol','Rafael Choi',2025,121,null,null,(SELECT Id FROM Movies.Genre WHERE [Description] = 'Romance'),(SELECT Id FROM Movies.Rating WHERE [Description] = 'R'));
--- */
+*/
 
--- optional movie-actor data; IMPORTANT: dependent upon actor and movie data above
-/*
+/* optional movie-actor data; IMPORTANT: dependent upon actor and movie data above
 INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Fog Beneath Us'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'John Cho'));
 INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'Galaxia Drift'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Zoe Kravitz'));
 INSERT INTO Movies.MovieActor(MovieId,ActorId) VALUES((SELECT Id FROM Movies.Movie WHERE Title = 'The Last Violin'),(SELECT Id FROM Movies.Actor WHERE [Name] = 'Rachel Weisz'));
