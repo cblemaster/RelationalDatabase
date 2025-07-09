@@ -18,7 +18,7 @@ CREATE VIEW Movies.MoviesWithActors AS
     GROUP BY m.Title, m.Id;
 GO
 
-CREATE VIEW Movies.MoviesAlphabeticalByTitle AS
+CREATE VIEW Movies.MoviesWithDetails AS
     SELECT m.Id, M.Title, m.DirectorName, m.ReleaseYear, m.RunTimeMinutes, m.StarRating, m.DateAcquired,
         g.[Description] AS GenreDescription, r.[Description] AS RatingDescription,
         (SELECT IIF(r.IsKidFriendly = 0,'No','Yes')) AS RatingIsKidFriendly,
@@ -64,7 +64,7 @@ CREATE VIEW Movies.CountOfMoviesByActor AS
     SELECT a.[Name] AS ActorName, COUNT(m.Id) AS CountOfMovies
     FROM Movies.Actor a
     LEFT JOIN Movies.MovieActor ma ON (a.Id = ma.ActorId)
-    INNER JOIN Movies.Movie m ON (ma.MovieId = m.Id)
+    LEFT JOIN Movies.Movie m ON (ma.MovieId = m.Id)
     GROUP BY a.[Name];
 GO
 
@@ -98,7 +98,7 @@ CREATE VIEW Movies.TotalRunTimByActor AS
     SELECT a.[Name] AS ActorName, SUM(m.RunTimeMinutes) AS TotalRunTimMinutes
     FROM Movies.Actor a
     LEFT JOIN Movies.MovieActor ma ON (a.Id = ma.ActorId)
-    INNER JOIN Movies.Movie m ON (ma.MovieId = m.Id)
+    LEFT JOIN Movies.Movie m ON (ma.MovieId = m.Id)
     GROUP BY a.[Name];
 GO
 
@@ -123,7 +123,7 @@ CREATE VIEW Movies.ActorsWithMoviesHavingRatingIsKidFriendly AS
     SELECT a.[Name] AS ActorName
     FROM Movies.Actor a
     LEFT JOIN Movies.MovieActor ma ON (a.Id = ma.ActorId)
-    INNER JOIN Movies.Movie m ON (ma.MovieId = m.Id)
+    LEFT JOIN Movies.Movie m ON (ma.MovieId = m.Id)
     INNER JOIN Movies.Rating r ON (m.RatingId = r.Id)
     WHERE r.IsKidFriendly = 1
     GROUP BY a.[Name];
