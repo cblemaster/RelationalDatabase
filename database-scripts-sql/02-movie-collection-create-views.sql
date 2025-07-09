@@ -68,16 +68,6 @@ CREATE VIEW Movies.CountOfMoviesByActor AS
     GROUP BY a.[Name];
 GO
 
-CREATE VIEW Movies.FiveLongestByRunTime AS
-    SELECT TOP 5 m.Title, m.RunTimeMinutes
-    FROM Movies.Movie m;
-GO
-
-CREATE VIEW Movies.FiveShortestByRunTime AS
-    SELECT TOP 5 m.Title, m.RunTimeMinutes
-    FROM Movies.Movie m;
-GO
-
 CREATE VIEW Movies.TotalRunTimByDirector AS
     SELECT m.DirectorName, SUM(m.RunTimeMinutes) AS TotalRunTimMinutes
     FROM Movies.Movie m
